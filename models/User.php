@@ -18,9 +18,9 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public static function findIdentity($id)
     {
-        $user   = \Yii::$app->session->get('user_data');
-        if ($user) {
-            $config = $user;
+        $data = \Yii::$app->user->getData();
+        if ($data) {
+            $config = $data;
             $config['class'] = static::className();
             return \Yii::createObject($config);
         }
