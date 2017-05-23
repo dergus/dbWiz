@@ -9,19 +9,16 @@ class InitFilter extends ActionFilter
 {
     public function beforeAction($action)
     {
-        $db = Yii::$app->db;
+        $db       = Yii::$app->db;
         $identity = Yii::$app->user->identity;
-        $database = '';
-        $requestedRoute = Yii::$app->requestedRoute;
-        if (preg_match('/^databases\/(?<db>[\w\-_]+)/', $requestedRoute, $matches)) {
-            $database = $matches['db'];
-        }
+        $database = Yii::$app->request->get('db', '');
 
         Yii::configure($db, [
-            'dsn'      => "{$identity->driverName}:{$identity->host};{$database}",
+            'dsn'      => "{$identity->driverName}:host={$identity->host};dbname={$database}",
             'username' => $identity->username,
             'password' => $identity->password,
         ]);
+
         return parent::beforeAction($action);
     }
 }

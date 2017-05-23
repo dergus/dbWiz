@@ -40,13 +40,19 @@ $config = [
             ],
         ],
         'db' => [
-            'class' => 'app\components\Connection'
+            'class' => 'app\db\Connection'
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'suffix' => '/',
+            'normalizer'     => [
+                'class' => 'yii\web\UrlNormalizer'
+            ],
             'rules' => [
-//                'database/<db:\w+>' => 'database/index'
+                'databases/'         => 'databases/index',
+                'databases/<db:\w+>/' => 'databases/show',
+                'databases/<db:\w+>/tables/' => 'tables/index',
             ],
         ],
 

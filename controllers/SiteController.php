@@ -87,4 +87,9 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
+    public function actionTest()
+    {
+        return \yii\helpers\Url::to(['/some/index/', 'id' => 45]);
+    }
+
 }

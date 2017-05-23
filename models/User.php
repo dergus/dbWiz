@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-use app\components\Connection;
+use app\db\Connection;
 
 class User extends \yii\base\Object implements \yii\web\IdentityInterface
 {
@@ -80,7 +80,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     public function validatePassword($password)
     {
         try {
-            $config['dsn']      = "{$this->driverName}:{$this->host}";
+            $config['dsn']      = "{$this->driverName}:host={$this->host}";
             $config['username'] = $this->username;
             $config['password'] = $this->password;
             $config['class']    = Connection::className();

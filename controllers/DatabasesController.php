@@ -6,16 +6,22 @@ use Yii;
 use app\components\Controller;
 use yii\data\ArrayDataProvider;
 
-class DatabasesController extends  Controller
+class DatabasesController extends Controller
 {
     public function actionIndex()
     {
-        $db = Yii::$app->db;
-        $cmd = $db->createCommand('SHOW DATABASES');
+        $databases = Yii::$app->db->getSchema()->getSchemaNames();
         $dataProvider = new ArrayDataProvider([
-            'allModels' => $cmd->queryAll(),
-            'key' => 'Database'
+            'allModels'  => $databases,
+            'pagination' => false,
+            'sort'       => false
         ]);
-        return $this->render('index', compact('dataProvider'));
+
+        return $this->render('index', compact('databases'));
+    }
+
+    public function actionShow(string $db)
+    {
+        return $db;
     }
 }
