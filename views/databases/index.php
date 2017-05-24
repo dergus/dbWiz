@@ -1,6 +1,7 @@
 <?php
 use yii\grid\GridView;
 use yii\helpers\Html;
+use app\grid\DataColumn;
 
 /* @var $this yii\web\View */
 
@@ -8,6 +9,7 @@ use yii\helpers\Html;
 
 <?=GridView::widget([
     'dataProvider' => $dataProvider,
+    'dataColumnClass' => DataColumn::class,
     'columns'      => [
         [
             'header' => Yii::t('app', 'Database'),

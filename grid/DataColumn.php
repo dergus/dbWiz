@@ -22,4 +22,27 @@ class DataColumn extends BaseDataColumn
             return parent::renderDataCellContent($model, $key, $index);
         }
     }
+
+
+    /**
+     * @inheritdoc
+     */
+    protected function renderHeaderCellContent()
+    {
+        if ($this->header !== null || $this->label === null && $this->attribute === null) {
+            return parent::renderHeaderCellContent();
+        }
+
+        if ($this->attribute
+            && $this->enableSorting
+            && ($sort = $this->grid->dataProvider->getSort())) {
+            return $sort->link($this->attribute, $this->sortLinkOptions);
+        } else {
+            $label = $this->getHeaderCellLabel();
+            if ($this->encodeLabel) {
+                $label = Html::encode($label);
+            }
+            return Html::encode($label);
+        }
+    }
 }
