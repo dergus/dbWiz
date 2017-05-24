@@ -5,6 +5,8 @@ use app\grid\DataColumn;
 
 /* @var $this yii\web\View */
 
+$this->title = Yii::t('app', 'Databases');
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <?=GridView::widget([

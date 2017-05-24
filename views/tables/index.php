@@ -5,6 +5,9 @@ use app\grid\DataColumn;
 
 /* @var $this yii\web\View */
 
+$this->title = join(" → ", [Yii::t('app', 'Databases'), $db]);
+$this->params['breadcrumbs'][] = ['url' => ['/databases/index/'], 'label' => Yii::t('app', 'Databases')];
+$this->params['breadcrumbs'][] = $db;
 ?>
 
 <?=GridView::widget([

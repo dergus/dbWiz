@@ -12,15 +12,15 @@ class DataController extends Controller
 {
     public function actionIndex(string $db, string $table)
     {
-        $db     = Yii::$app->db;
-        $schema = $db->getSchema();
+        $dbCon = Yii::$app->db;
+        $schema = $dbCon->getSchema();
         $tables = $schema->getTableNames();
         if (!in_array($table, $tables)) {
             throw new BadRequestHttpException(Yii::t('app', 'no such table'));
         }
 
         $tableSchema  = $schema->getTableSchema($table);
-        $totalCount   = $db->createCommand("SELECT COUNT(*) FROM {$table}")->queryScalar();
+        $totalCount   = $dbCon->createCommand("SELECT COUNT(*) FROM {$table}")->queryScalar();
         $dataProvider = new SqlDataProvider([
             'sql'        => "SELECT * FROM {$table}",
             'totalCount' => $totalCount,
@@ -29,6 +29,6 @@ class DataController extends Controller
             ])
         ]);
 
-        return $this->render('index', compact('dataProvider'));
+        return $this->render('index', compact('dataProvider', 'db'));
     }
 }
