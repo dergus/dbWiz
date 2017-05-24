@@ -17,7 +17,7 @@ class DatabasesController extends Controller
             'sort'       => false
         ]);
 
-        return $this->render('index', compact('databases'));
+        return $this->render('index', compact('dataProvider'));
     }
 
     public function actionShow(string $db)

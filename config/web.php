@@ -53,6 +53,7 @@ $config = [
                 'databases/'         => 'databases/index',
                 'databases/<db:\w+>/' => 'databases/show',
                 'databases/<db:\w+>/tables/' => 'tables/index',
+                'databases/<db:\w+>/tables/<table:\w+>/data/' => 'data/index',
             ],
         ],
 

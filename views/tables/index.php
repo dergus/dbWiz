@@ -9,13 +9,12 @@ use yii\helpers\Html;
 <?=GridView::widget([
     'dataProvider' => $dataProvider,
     'columns'      => [
-        ['class' => 'yii\grid\CheckboxColumn'],
-        ['class' => 'yii\grid\ActionColumn',],
         [
-            'value' => function($data) {
-                return Html::a($data, ['/databases/show/', 'db' => $data]);
+            'header' => Yii::t('app', 'Table'),
+            'value' => function($data) use($db) {
+                return Html::a($data, ['/data/index/', 'table' => $data, 'db' => $db]);
             },
-            'format'  => 'html'
+            'format'  => 'raw'
         ]
     ]
 ]);?>

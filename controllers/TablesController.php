@@ -17,6 +17,6 @@ class TablesController extends Controller
             'sort'       => false
         ]);
 
-        return $this->render('index', compact('dataProvider', 'tables'));
+        return $this->render('index', compact('dataProvider', 'tables', 'db'));
     }
 }

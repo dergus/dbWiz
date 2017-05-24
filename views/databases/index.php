@@ -6,21 +6,15 @@ use yii\helpers\Html;
 
 ?>
 
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th></th>
-        <th></th>
-        <th>Table</th>
-    </tr>
-    </thead>
-    <tbody>
-    <?php foreach ($databases as $data): ?>
-        <tr>
-            <td>checkbox</td>
-            <td>actions</td>
-            <td><a href="/databases/<?=$data?>/tables/"><?=$data?></a> </td>
-        </tr>
-    <?php endforeach;?>
-    </tbody>
-</table>
+<?=GridView::widget([
+    'dataProvider' => $dataProvider,
+    'columns'      => [
+        [
+            'header' => Yii::t('app', 'Database'),
+            'value' => function($db) {
+                return Html::a($db, ['/tables/index/', 'db' => $db]);
+            },
+            'format'  => 'raw'
+        ]
+    ]
+]);?>
