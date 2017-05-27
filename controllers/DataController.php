@@ -59,14 +59,14 @@ class DataController extends Controller
     {
         $where  = '';
         $params = '';
-        foreach ($searches as $search) {
+        foreach ($searches as $i => $search) {
             if (isset($search['column'], $search['operator'], $search['value']) &&
                 in_array($search['column'], $columnNames) &&
                 in_array($search['operator'], $operators)
             ) {
                 $paramAliases = [];
                 if (!in_array($search['operator'], ['IS NULL', 'IS NOT NULL'])) {
-                    $paramAlias          = ':search_' . $search['column'];
+                    $paramAlias          = ':search_' . $search['column'] . $i;
                     $paramAliases[]      = $paramAlias;
                     $params[$paramAlias] = $search['value'];
                 }
