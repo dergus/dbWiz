@@ -1,6 +1,6 @@
 <?php
 use yii\data\SqlDataProvider;
-use yii\grid\GridView;
+use app\grid\GridView;
 use yii\helpers\Html;
 use app\grid\DataColumn;
 use yii\helpers\Url;
@@ -12,6 +12,7 @@ use yii\helpers\Url;
  * @var $dataProvider SqlDataProvider
  * @var $db string
  * @var $table string
+ * @var $primaryKey string
  */
 
 $this->title                   = join(" → ", [Yii::t('app', 'Databases'), $db, Yii::t('app', 'Data')]);
@@ -56,6 +57,8 @@ $this->params['breadcrumbs'][] =
 
 <?= GridView::widget([
     'dataProvider'    => $dataProvider,
-    'dataColumnClass' => DataColumn::class
+    'dataColumnClass' => DataColumn::class,
+    'editable'        => (bool) $primaryKey,
+    'primaryKey'      => $primaryKey
 ]); ?>
 

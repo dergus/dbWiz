@@ -1,3 +1,7 @@
+td {
+    max-width: 300px;
+}
+
 .data_search {
     margin-bottom: 20px;
 }
@@ -13,6 +17,24 @@
 
 .data_search [type="submit"] {
     display: none;
+}
+
+.app-alert {
+    display: none;
+    padding: 10px;
+    position: fixed;
+    bottom: 5px;
+    left: 10px;
+    border-radius: 5px;
+    color: white;
+}
+
+.app-alert-success {
+    background: #3bb25a;
+}
+
+.app-alert-fail {
+    background: #a64637;
 }
 
 

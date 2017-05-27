@@ -23,6 +23,7 @@ class AppAsset extends AssetBundle
     ];
 
     public $js       = [
+        'js/vendor/jquery.stickytableheaders.min.js',
         'js/main.js'
     ];
 

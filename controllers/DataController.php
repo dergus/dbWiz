@@ -8,6 +8,7 @@ use app\components\Controller;
 use yii\data\SqlDataProvider;
 use yii\web\BadRequestHttpException;
 use app\db\mysql\Schema;
+use yii\web\HttpException;
 
 class DataController extends Controller
 {
@@ -48,7 +49,10 @@ class DataController extends Controller
             ])
         ]);
 
-        return $this->render('index', compact('dataProvider', 'db', 'columnNames', 'operators', 'searches', 'table'));
+        $primaryKey = $tableSchema->primaryKey;
+
+        return $this->render('index',
+            compact('dataProvider', 'db', 'columnNames', 'operators', 'searches', 'table', 'primaryKey'));
     }
 
     protected function makeSearchCriteria(array $searches, array $columnNames, array $operators): array
@@ -76,5 +80,33 @@ class DataController extends Controller
         }
 
         return [$where, $params];
+    }
+
+    /**
+     * update record
+     * @param string $db
+     * @param string $table
+     * @return string
+     */
+    public function actionUpdate(string $db, string $table)
+    {
+        $request = Yii::$app->request;
+        $db      = Yii::$app->db;
+        $params  = $request->bodyParams;
+        $resp    = ['ok' => false, 'affected_rows' => 0];
+
+        if (isset($params['condition'], $params['columns'])) {
+            $cmd = $db->createCommand();
+            try {
+                $resp['affected_rows'] = $cmd->update($table, $params['columns'], $params['condition'])->execute();
+                if ($resp['affected_rows']) {
+                    $resp['ok'] = true;
+                }
+            } catch (\Exception $e) {
+                $resp['error'] = $e->getMessage();
+            }
+        }
+
+        return json_encode($resp);
     }
 }

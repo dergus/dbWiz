@@ -6,6 +6,22 @@ use yii\helpers\Html;
 
 class DataColumn extends BaseDataColumn
 {
+    /**
+     * @property GridView $grid
+     */
+    public function init()
+    {
+        parent::init();
+
+        $this->contentOptions = function() {
+            return [
+                'contenteditable' => $this->grid->editable ? 'true': 'false',
+                'column-name'     => $this->attribute
+            ];
+        };
+
+    }
+
     protected function getHeaderCellLabel()
     {
         return $this->attribute;

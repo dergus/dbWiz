@@ -1,5 +1,5 @@
 <?php
-use yii\grid\GridView;
+use app\grid\GridView;
 use yii\helpers\Html;
 use app\grid\DataColumn;
 

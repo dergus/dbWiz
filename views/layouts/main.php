@@ -67,6 +67,21 @@ AppAsset::register($this);
     </div>
 </footer>
 
+<!--some common html elements-->
+<div class="app-alert app-alert-success">
+    <i class="glyphicon glyphicon-ok"></i>
+    <span class="alert-msg msg-successful">
+        <?=Yii::t('app', 'Update query was successful')?>
+    </span>
+</div>
+
+<div class="app-alert app-alert-fail">
+    <i class="glyphicon glyphicon-alert"></i>
+    <span class="alert-msg msg-successful">
+        <?=Yii::t('app', 'Update query failed')?>
+    </span>
+</div>
+
 <?php $this->endBody() ?>
 </body>
 </html>
