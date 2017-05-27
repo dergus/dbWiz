@@ -42,6 +42,16 @@ $(function () {
         })
         .on('click', '.app-alert', function () {
             $(this).fadeOut();
+        })
+        .on('keyup', '.js_filter_tables_input', function () {
+            var name = $(this).val();
+            var pattern = new RegExp(name, 'i');
+            $('tbody tr').show().each(function () {
+                var $el = $(this);
+                if (!pattern.test($el.text())) {
+                    $el.hide();
+                }
+            });
         });
 
     //TODO: that's not very good code

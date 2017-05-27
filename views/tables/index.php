@@ -9,6 +9,14 @@ $this->title = join(" → ", [Yii::t('app', 'Databases'), $db]);
 $this->params['breadcrumbs'][] = ['url' => ['/databases/index/'], 'label' => Yii::t('app', 'Databases')];
 $this->params['breadcrumbs'][] = $db;
 ?>
+<div class="row filter-tables">
+    <div class="col-md-2">
+        <?= Yii::t('app', 'filter tables:') ?>
+    </div>
+    <div class="col-md-2">
+        <?= Html::textInput('filter_tables', '', ['class' => 'form-control js_filter_tables_input']) ?>
+    </div>
+</div>
 
 <?=GridView::widget([
     'dataProvider' => $dataProvider,
