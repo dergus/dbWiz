@@ -57,6 +57,7 @@ class DataController extends Controller
 
     protected function makeSearchCriteria(array $searches, array $columnNames, array $operators): array
     {
+        // TODO: rewrite with \yii\db\Query
         $where  = '';
         $params = '';
         foreach ($searches as $i => $search) {
@@ -73,7 +74,7 @@ class DataController extends Controller
 
                 $where .= ' ' .
                     join(' ',
-                        array_merge([$where ? 'AND' : 'WHERE', $search['column'], $search['operator']], $paramAliases));
+                        array_merge([$where ? 'AND' : 'WHERE', "`{$search['column']}`", $search['operator']], $paramAliases));
 
 
             }
