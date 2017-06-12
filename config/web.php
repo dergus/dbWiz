@@ -62,6 +62,18 @@ $config = [
                 'GET databases/<db:\w+>/tables/'                    => 'tables/index',
                 'GET databases/<db:\w+>/tables/<table:\w+>/data/'   => 'data/index',
                 'PATCH databases/<db:\w+>/tables/<table:\w+>/data/' => 'data/update',
+                [
+                    'pattern'  => 'query/<db:\w+>/',
+                    'route'    => 'query/index',
+                    'defaults' => ['db' => ''],
+                    'verb'     => 'GET'
+                ],
+                [
+                    'pattern'  => 'query/<db:\w+>/',
+                    'route'    => 'query/execute',
+                    'defaults' => ['db' => ''],
+                    'verb'     => 'POST'
+                ],
             ],
         ],
 

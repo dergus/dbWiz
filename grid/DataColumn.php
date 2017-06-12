@@ -1,4 +1,5 @@
 <?php
+
 namespace app\grid;
 
 use yii\grid\DataColumn as BaseDataColumn;
@@ -13,9 +14,9 @@ class DataColumn extends BaseDataColumn
     {
         parent::init();
 
-        $this->contentOptions = function() {
+        $this->contentOptions = function () {
             return [
-                'contenteditable' => $this->grid->editable ? 'true': 'false',
+                'contenteditable' => $this->grid->editable ? 'true' : 'false',
                 'column-name'     => $this->attribute
             ];
         };
@@ -49,15 +50,14 @@ class DataColumn extends BaseDataColumn
             return parent::renderHeaderCellContent();
         }
 
-        if ($this->attribute
-            && $this->enableSorting
-            && ($sort = $this->grid->dataProvider->getSort())) {
+        if ($this->attribute && $this->enableSorting && ($sort = $this->grid->dataProvider->getSort())) {
             return $sort->link($this->attribute, $this->sortLinkOptions);
         } else {
             $label = $this->getHeaderCellLabel();
             if ($this->encodeLabel) {
                 $label = Html::encode($label);
             }
+
             return Html::encode($label);
         }
     }

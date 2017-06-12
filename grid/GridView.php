@@ -24,6 +24,8 @@ class GridView extends BaseGridView
      */
     public $editableCssClass = 'table-editable';
 
+    public $dataColumnClass = DataColumn::class;
+
     public function init()
     {
         parent::init();

@@ -26,29 +26,30 @@ AppAsset::register($this);
 
 <div class="wrap">
     <?php
+    $items = [];
+    if (Yii::$app->user->isGuest) {
+        $items[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
+    } else {
+        $items[] =
+            ['label' => Yii::t('app', 'Query'), 'url' => ['/query/index', 'db' => Yii::$app->request->get('db', '')]];
+        $items[] =
+            '<li>' .
+            Html::beginForm(['/site/logout'], 'post') .
+            Html::submitButton('Logout (' . Yii::$app->user->identity->username . ')',
+                ['class' => 'btn btn-link logout']) .
+            Html::endForm() .
+            '</li>';
+    }
     NavBar::begin([
         'brandLabel' => 'dbWiz',
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
+        'brandUrl'   => Yii::$app->homeUrl,
+        'options'    => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
-        ],
+        'items'   => $items
     ]);
     NavBar::end();
     ?>
@@ -71,14 +72,14 @@ AppAsset::register($this);
 <div class="app-alert app-alert-success">
     <i class="glyphicon glyphicon-ok"></i>
     <span class="alert-msg msg-successful">
-        <?=Yii::t('app', 'Update query was successful')?>
+        <?= Yii::t('app', 'Update query was successful') ?>
     </span>
 </div>
 
 <div class="app-alert app-alert-fail">
     <i class="glyphicon glyphicon-alert"></i>
     <span class="alert-msg msg-successful">
-        <?=Yii::t('app', 'Update query failed')?>
+        <?= Yii::t('app', 'Update query failed') ?>
     </span>
 </div>
 
